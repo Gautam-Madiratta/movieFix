@@ -1,65 +1,86 @@
-import React, { useState, useEffect } from "react";
-import Spinner from "./Spinner";
-import InfiniteScroll from "react-infinite-scroll-component";
-import MovieDetails from "./MovieDetails";
-import Search from "./Search";
+import React, { useState, useEffect } from 'react';
+import Spinner from './Spinner';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import MovieDetails from './MovieDetails';
+import Search from './Search';
+import { useLocation } from 'react-router-dom';
+import NoMovieResults from './NoMoviesResult'
+import "../Css/Movies.css"
 
-const Movies = (props) => {
+
+const Movies = ({ apiKey, genres, setProgress,search}) => {
   const [movies, setMovies] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  // eslint-disable-next-line
   const [year, setYear] = useState(2012);
   const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
+  const [searchTerm, setSearchTerm] = useState('');
   const moviesPerRequest = 20;
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  // eslint-disable-next-line
-  const [page, setPage] = useState(1);
+  const page = 1;
+  const location = useLocation()
 
   const updateMovies = async () => {
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${props.apiKey}&sort_by=popularity.desc&primary_release_year=${year}&page=${page}&vote_count.gte=100&with_genres=${props.genres}`;
-    if (searchTerm.trim() !== "") {
-      // If search results are present, update URL for search query
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${props.apiKey}&query=${searchTerm}`;
-    }
-
     try {
-      props.setProgress(10);
-      let data = await fetch(url);
-      props.setProgress(30);
-      let parsedData = await data.json();
-      props.setProgress(70);
-      if (searchResults) {
-        // Reset movies when fetching new data
-        setMovies(parsedData.results.slice(0, moviesPerRequest));
-      } else {
-        setMovies(movies.concat(parsedData.results.slice(0, moviesPerRequest)));
+      setYear(2012)
+      let initialYear = 2012;
+      let updatedSearchTerm = searchTerm; 
+      // Reset searchTerm if not on search page
+      if (location.pathname !== "/search") {
+        setSearchTerm("");
+        updatedSearchTerm = "";
       }
+      
+       // This will be the updated state value
+      let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&primary_release_year=${initialYear}&page=${page}&vote_count.gte=100&with_genres=${genres}`;
+  
+      // Update URL based on updated searchTerm
+      if (updatedSearchTerm.trim() !== "") {
+        url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(updatedSearchTerm)}`;
+      }
+  
+      setProgress(10);
+      let data = await fetch(url);
+      setProgress(30);
+      let parsedData = await data.json();
+      setProgress(70);
+  
+      // Update movies based on searchResults flag
+    //  if (searchResults) {
+       setMovies(parsedData.results.slice(0, moviesPerRequest));
+    // } else {
+    //    setMovies(movies.concat(parsedData.results.slice(0, moviesPerRequest)));
+    //  }
+      // Update other states
       setTotalResults(parsedData.total_results);
-      setYear(year + 1);
-      props.setProgress(100);
+      setProgress(100);
+      setYear(2012+1)
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
   };
+  
 
   useEffect(() => {
     updateMovies();
     // eslint-disable-next-line
-  }, [searchResults]); // Trigger updateMovies on searchResults change
+  }, [location,searchResults,genres]); // Trigger updateMovies when genres change
 
   const fetchMoreData = async () => {
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${props.apiKey}&sort_by=popularity.desc&primary_release_year=${year}&page=${page}&vote_count.gte=100&with_genres=${props.genres}`;
+    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&primary_release_year=${year}&page=${page}&vote_count.gte=100&with_genres=${genres}`;
     if (searchTerm.trim() !== "") {
       // If search results are present, update URL for search query
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${props.apiKey}&query=${searchTerm}`;
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`;
     }
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    setMovies(movies.concat(parsedData.results.slice(0, moviesPerRequest)));
-    setTotalResults(parsedData.total_results);
-    setYear(year + 1);
+    try {
+      let data = await fetch(url);
+      let parsedData = await data.json();
+      setMovies(movies.concat(parsedData.results.slice(0, moviesPerRequest)));
+      setTotalResults(parsedData.total_results);  
+      setYear(year + 1)
+    } catch (error) {
+      console.error('Error fetching more movies:', error);
+    }
   };
 
   const handleSearch = (results, term) => {
@@ -68,24 +89,28 @@ const Movies = (props) => {
   };
 
   return (
-    <div className="container" style={{ marginTop: "78px" }}>
-      <Search apiKey={props.apiKey} onSearch={handleSearch} />
-      <InfiniteScroll
-        dataLength={movies.length}
-        next={fetchMoreData}
-        hasMore={movies.length < totalResults && year <= currentYear}
-        loader={<Spinner />}
-      >
-        <div className="row">
-          {movies.map((element) => (
-            <div className="col-md-4" key={element.id}>
-              <MovieDetails element={element} />
-            </div>
-          ))}
-        </div>
-      </InfiniteScroll>
+    <div className="container ">
+      <Search apiKey={apiKey} onSearch={handleSearch} />
+      {movies.length === 0 ? (
+        <NoMovieResults />
+      ) : (
+        <InfiniteScroll
+          dataLength={movies.length}
+          next={fetchMoreData}
+          hasMore={movies.length < totalResults && year <= currentYear}
+          loader={<Spinner />}
+        >
+          <div className="row">
+            {movies.map((element) => (
+              <div className="col-md-4" key={element.id}>
+                <MovieDetails element={element} />
+              </div>
+            ))}
+          </div>
+        </InfiniteScroll>
+      )}
     </div>
   );
-};
+}
 
 export default Movies;
