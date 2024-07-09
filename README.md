@@ -1,6 +1,90 @@
+# Movie Site using TMDb API : Fancode
+
+![Movie Site Screenshot](./screenshot.png)
+
+## Overview
+
+This project is a movie site that leverages the [TMDb (The Movie Database) API](https://www.themoviedb.org/documentation/api) to fetch and display information about movies. It allows users to explore popular movies, search for specific titles, and filter movies by genres.
+
+## Features
+
+- **Browse Movies**: View a list of popular movies fetched from TMDb.
+- **Search**: Search for movies based on title.
+- **Filter by Genres**: Filter movies by specific genres such as Action, Comedy, Drama, etc.
+- **Infinite Scrolling**: Utilizes infinite scroll to load more movies as the user scrolls down.
+- **Responsive Design**: Ensures a seamless experience across various devices and screen sizes.
+
+## Technologies Used
+
+- **React**: Frontend library for building user interfaces.
+- **React Router**: For declarative routing in the application.
+- **Infinite Scroll Component**: Enhances the user experience by loading more movies dynamically.
+- **CSS**: Custom styles for layout and components.
+- **TMDb API**: Provides access to a vast database of movies, including details like titles, genres, and release years.
+
+## Getting Started
+
+To run this project locally, follow these steps:
+
+### How to run the project:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Gautam-Madiratta/movieFix
+   cd movieFix
+
+2. **Run the dependencies**:
+
+   ```bash
+   npm install react-router-dom react-infinite-scroll-component react-top-loading-bar
+
+3. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Gautam-Madiratta/movieFix
+   cd movieFix   
+
+4. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Gautam-Madiratta/movieFix
+   cd movieFix
+
+
+## Usage
+
+1. **Obtain an API key from TMDB**
+
+2. **Create a .env file in the root directory and add your API key:**
+
+```makefile
+REACT_APP_TMDB_API_KEY=your_api_key_here
+```
+
+3. Start the development server:
+
+   ```bash
+    npm run start
+
+4. Open your browser and go to http://localhost:3000 to view the website.
+
+### API Reference
+This project uses the TMDB API to fetch movie data. Make sure to sign up on TMDB to obtain an API key. The following endpoints are used:
+
+/search/movie: Search for movies by title.
+
+/movie/{movie_id}: Get details about a specific movie.
+
+https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&primary_release_year=${initialYear}&page=${page}&vote_count.gte=100&with_genres=${genres}`; : Get movies with year , page number and genres
+
+https://api.themoviedb.org/3/movie/{Movie_ID}?api_key=2dca580c2a14b55200e784d157207b4d&append_to_response=credits`; : To fetch movie details i.e cast , director ,genres etc
+
+### How to use react
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created using [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -68,3 +152,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Acknowledgments
+
+TMDb API Team: For providing the movie data API.
+
+React Community: For the powerful tools and libraries that make projects like this possible.
+
+This project was made for Fancode interview process. Thanks to Fancode team.
+
+### Additional Notes:
+
+Live Demo Link: https://movie-e6wunw8ef-gautam-madirattas-projects.vercel.app/
+
+(if the site doesnt work on link , try using a vpn)
+
+
