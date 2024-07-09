@@ -1,4 +1,4 @@
-# Movie Site using TMDb API
+# Movie Site using TMDb API : Fancode
 
 ![Movie Site Screenshot](./screenshot.png)
 
@@ -69,58 +69,18 @@ REACT_APP_TMDB_API_KEY=your_api_key_here
 
 4. Open your browser and go to http://localhost:3000 to view the website.
 
-API Reference
+### API Reference
 This project uses the TMDB API to fetch movie data. Make sure to sign up on TMDB to obtain an API key. The following endpoints are used:
 
 /search/movie: Search for movies by title.
+
 /movie/{movie_id}: Get details about a specific movie.
-Contributing
-Contributions are welcome! If you have any suggestions, bug fixes, or improvements, please follow these steps:
 
-Fork the repository and create your branch (git checkout -b feature/awesome-feature).
-Commit your changes (git commit -am 'Add some awesome feature').
-Push to the branch (git push origin feature/awesome-feature).
-Open a pull request.
-License
-This project is licensed under the MIT License
-You need an API key from TMDb to fetch movie data. Get it from TMDb API.
+https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&primary_release_year=${initialYear}&page=${page}&vote_count.gte=100&with_genres=${genres}`; : Get movies with year , page number and genres
 
-Create a .env file in the root directory of your project.
+https://api.themoviedb.org/3/movie/{Movie_ID}?api_key=2dca580c2a14b55200e784d157207b4d&append_to_response=credits`; : To fetch movie details i.e cast , director ,genres etc
 
-Add your API key to .env file:
-
-plaintext
-Copy code
-REACT_APP_TMDB_API_KEY=your-api-key-here
-Start the application:
-
-bash
-Copy code
-npm start
-Open the app:
-
-Open http://localhost:3000 in your browser to view the movie site.
-
-Contributing
-Contributions are welcome! Feel free to fork the repository and submit pull requests to propose changes.
-
-License
-This project is licensed under the MIT License.
-
-Acknowledgments
-TMDb API Team: For providing the movie data API.
-React Community: For the powerful tools and libraries that make projects like this possible.
-Additional Notes:
-Screenshots: Include screenshots of your application to give potential users and contributors a visual overview of the project.
-Live Demo Link: If your project is deployed online, provide a link to the live demo.
-Troubleshooting: Include common issues or troubleshooting tips if users encounter problems running the project locally.
-Contact Information: Optionally, provide your contact information or social media handles for questions and feedback.
-
-
-
-
-
-
+### How to use react
 
 # Getting Started with Create React App
 
@@ -192,3 +152,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Acknowledgments
+
+TMDb API Team: For providing the movie data API.
+
+React Community: For the powerful tools and libraries that make projects like this possible.
+
+This project was made for Fancode interview process. Thanks to Fancode team.
+
+### Additional Notes:
+
+Live Demo Link: https://movie-e6wunw8ef-gautam-madirattas-projects.vercel.app/
+
+(if the site doesnt work on link , try using a vpn)
+
+
