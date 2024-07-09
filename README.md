@@ -12,6 +12,7 @@ This project is a movie site that leverages the [TMDb (The Movie Database) API](
 - **Search**: Search for movies based on title.
 - **Filter by Genres**: Filter movies by specific genres such as Action, Comedy, Drama, etc.
 - **Infinite Scrolling**: Utilizes infinite scroll to load more movies as the user scrolls down.
+- **Movie Sorting**: After every 20 movies it shows movie with next year. As you scroll down it changes year to next year after 20 movies dynamically.
 - **Responsive Design**: Ensures a seamless experience across various devices and screen sizes.
 
 ## Technologies Used
