@@ -14,6 +14,7 @@ This project is a movie site that leverages the [TMDb (The Movie Database) API](
 - **Infinite Scrolling**: Utilizes infinite scroll to load more movies as the user scrolls down.
 - **Movie Sorting**: After every 20 movies it shows movie with next year. As you scroll down it changes year to next year after 20 movies dynamically.
 - **Responsive Design**: Ensures a seamless experience across various devices and screen sizes.
+- **Mode**: Design is in dark mode
 
 ## Technologies Used
 
@@ -22,6 +23,33 @@ This project is a movie site that leverages the [TMDb (The Movie Database) API](
 - **Infinite Scroll Component**: Enhances the user experience by loading more movies dynamically.
 - **CSS**: Custom styles for layout and components.
 - **TMDb API**: Provides access to a vast database of movies, including details like titles, genres, and release years.
+
+## List of Requirements covered and not covered
+
+- Infinite scrolling has been added to show movies as you scroll down till the current year (covered)
+- Displayed a list of movies sorted in descending order of popularity. (covered)
+- Showed the movie title, image, genre, cast, director, and a short description related. (covered)
+to the movie in each information card. (covered)
+- Loaded a total of only 20 movies for each year. it changes to next as you scroll down. (covered)
+- By default, when a user lands on the page, display a list of movies of the year
+2012 (covered)
+- Implemented smooth scrolling behavior to load more movies as the user scrolls down
+  i.e load movies of next year when user scrolls down. (covered)
+- load movies of previous year when user scrolls up is not covered
+- As and when the user scrolls and movies are added to the list, made sure that
+this interaction is smooth and doesn’t cause any jitters. (covered)
+
+- Genre Filter (Implemented/covered)
+○ Provide a filter UI that allows users to filter movies by genre.
+○ Fetch genres from this API and show genres as filters
+○ When a user selects one or more genres, the list should only display movies of
+the selected genres.
+○ Please note that whenever a user selects a genre, a fresh list of movies should
+be fetched from the API for that particular genre.
+
+-Implement a search bar which searches for the movie based on the search string
+and displays an infinite loading list of movies which matches the search. (Implemented/covered)
+  
 
 ## Getting Started
 
@@ -38,20 +66,8 @@ To run this project locally, follow these steps:
 2. **Run the dependencies**:
 
    ```bash
+   npm install
    npm install react-router-dom react-infinite-scroll-component react-top-loading-bar
-
-3. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/Gautam-Madiratta/movieFix
-   cd movieFix   
-
-4. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/Gautam-Madiratta/movieFix
-   cd movieFix
-
 
 ## Usage
 
